@@ -1,0 +1,8 @@
+[package]
+name = "card-chameleon"
+version = "0.1.0"
+authors = ["Ethan Kent <ekent@jd11.law.harvard.edu>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.5"
