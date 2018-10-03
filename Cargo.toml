@@ -5,4 +5,7 @@ authors = ["Ethan Kent <ekent@jd11.law.harvard.edu>"]
 edition = "2018"
 
 [dependencies]
+itertools = "0.7"
+lazy_static = "1.1"
 rand = "0.5"
+regex = "1"

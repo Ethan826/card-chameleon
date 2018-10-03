@@ -1,7 +1,8 @@
 use crate::card::*;
+use itertools::Itertools;
 use rand::{Rng, ThreadRng};
 
-pub struct Deck([Card; 54]);
+pub struct Deck(Vec<Card>);
 
 impl std::fmt::Debug for Deck {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
@@ -14,15 +15,7 @@ impl Deck {
         use self::Rank::*;
         use self::Suit::*;
 
-        Deck([
-            Card {
-                rank: Joker,
-                suit: Black,
-            },
-            Card {
-                rank: Joker,
-                suit: Red,
-            },
+        Deck(vec![
             Card {
                 rank: Ace,
                 suit: Hearts,
@@ -237,4 +230,18 @@ impl Deck {
     pub fn shuffle(&mut self, rng: &mut ThreadRng) {
         rng.shuffle(&mut self.0);
     }
+
+    pub fn key_deck(&mut self) {
+        let (black, red): (Vec<Card>, Vec<Card>) = self.0.iter().partition(|card| card.is_black());
+        self.0 = black.into_iter().interleave(red).collect();
+    }
+}
+
+// =================================================================================================
+// Tests
+// =================================================================================================
+
+fn test_key_deck() {
+    use self::Card::*;
+    use self::Deck::*;
 }
